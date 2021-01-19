@@ -1,0 +1,86 @@
+<local:BasePage x:Class="气象站数据采集系统.WiredSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:气象站数据采集系统"
+      xmlns:metar="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="558" d:DesignWidth="900"
+      Title="WiredSettingPage">
+    <Page.Resources>
+        <Storyboard x:Key="OpenData">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="GridMain" From="0" To="-900,0,0,0" Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Key="CloseData">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" Storyboard.TargetName="GridMain" From="-900,0,0,0" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_real">
+            <BeginStoryboard Storyboard="{StaticResource OpenData}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_hist">
+            <BeginStoryboard Storyboard="{StaticResource OpenData}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btn_exit">
+            <BeginStoryboard Storyboard="{StaticResource CloseData}"/>
+        </EventTrigger>
+    </Page.Triggers>
+    <Border>
+        <Grid x:Name="GridMain" Width="1800">
+            <StackPanel Orientation="Horizontal">
+                <Grid Height="558" Width="900">
+                    <Button x:Name="ButtonExit" Width="30" Height="30" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <metar:PackIcon Kind="ExitToApp" RenderTransformOrigin="0.5,0.5" Foreground="White" Width="30" Height="30">
+                            <metar:PackIcon.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </metar:PackIcon.RenderTransform>
+                        </metar:PackIcon>
+                    </Button>
+                    <StackPanel Width="790" Margin="0 10 0 0">
+                        <TextBlock Width="730" Foreground="White" FontSize="25" FontFamily="KaiTi" Text="有线获取数据方式页面，请配置串口连接参数：" Margin="0,0,0,30"/>
+                        <ListBox x:Name="SerialPortList" Width="790" Height="320" Padding="0">
+                            <local:SerialPortControl />
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="Btn_Add" Width="80" Height="30" Padding="0" Click="Btn_Add_Click" ToolTip="添加串口">
+                                <metar:PackIcon Kind="Plus" Width="80" Height="30"/>
+                            </Button>
+                            <Button x:Name="Btn_Del" Width="80" Height="30" Padding="0" Click="Btn_Del_Click" ToolTip="删除串口" Margin="150,0,0,0">
+                                <metar:PackIcon Kind="Minus" Width="80" Height="30"/>
+                            </Button>
+                        </StackPanel>
+                        <Button x:Name="btn_real" Width="80" Height="30" Padding="0" HorizontalAlignment="Right" ToolTip="Next" Margin="0,35,0,0" Click="Btn_real_Click">
+                            <TextBlock Text="实时数据" TextAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="btn_hist" Width="80" Height="30" Padding="0" HorizontalAlignment="Right" ToolTip="Next" Margin="0,20,0,0" Click="Btn_hist_Click">
+                            <TextBlock Text="历史数据" TextAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Height="558" Width="900">
+                    <Button x:Name="btn_exit" Width="30" Height="30" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <metar:PackIcon Kind="ExitToApp" RenderTransformOrigin="0.5,0.5" Foreground="White" Width="30" Height="30">
+                            <metar:PackIcon.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </metar:PackIcon.RenderTransform>
+                        </metar:PackIcon>
+                    </Button>
+                    <Frame x:Name="DataDisplay" Width="900"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
+</local:BasePage>

@@ -1,0 +1,30 @@
+<local:BasePage x:Class="气象站数据采集系统.HistoricalDataPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:metar="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:气象站数据采集系统"
+      mc:Ignorable="d" 
+      d:DesignHeight="558" d:DesignWidth="900">
+    <Border>
+        <Grid>
+            <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top">
+                <TextBlock Text="气象站历史数据--" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White" Margin="70,0,0,0"/>
+                <TextBlock Text="{Binding ElementName=Data_Display,Path=SelectedItem.Content}" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White" Margin="0,0,20,0" />
+                <TextBlock Text="开始时间：" VerticalAlignment="Center" Foreground="White" Margin="20,0,5,0"/>
+                <DatePicker x:Name="Time_Start" VerticalAlignment="Center" Text="2018/10/01" Foreground="White"/>
+                <TextBlock Text="结束时间：" VerticalAlignment="Center" Foreground="White" Margin="15,0,5,0"/>
+                <DatePicker x:Name="Time_Stop" VerticalAlignment="Center" Text="2018/10/01" Foreground="White"/>
+                <TextBlock Text="数据显示方式：" VerticalAlignment="Center" Foreground="White" Margin="20,0,15,0"/>
+                <ComboBox x:Name="Data_Display" VerticalAlignment="Center" Foreground="White" DropDownClosed="Data_Display_DropDownClosed" >
+                    <ComboBoxItem x:Name="linechart" Content="折线图"/>
+                    <ComboBoxItem x:Name="listchart" Content="列表图" IsSelected="True"/>
+                </ComboBox>
+            </StackPanel>
+
+            <Frame x:Name="ChartsFrame" Height="503" VerticalAlignment="Top" Margin="0 54 0 0"/>
+        </Grid>
+    </Border>
+</local:BasePage>

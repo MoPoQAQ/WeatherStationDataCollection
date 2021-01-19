@@ -1,0 +1,27 @@
+<local:BasePage x:Class="气象站数据采集系统.SelectCommunicationMethodPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:气象站数据采集系统"
+      mc:Ignorable="d" 
+      d:DesignHeight="558" d:DesignWidth="900"
+      Title="SelectCommunicationMethodPage">
+
+    <Border>
+        <Grid>
+            <StackPanel>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,80,0,0">
+                    <TextBlock FontFamily="KaiTi" FontSize="25" Text="欢迎来到气象站数据采集系统，请阅读以下注意事项：" Foreground="White" Margin="0,0,0,20"/>
+                    <TextBlock FontFamily="KaiTi" FontSize="25" Text="    1.有线和无线通信方式只能二选一" Foreground="White"/>
+                    <TextBlock FontFamily="KaiTi" FontSize="25" Text="    2.选择通信方式后，设置通信参数" Foreground="White"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,82,0,0">
+                    <Button x:Name="btn_wired" Margin="0,0,132,0" Style="{DynamicResource WiredCommButton}"/>
+                    <Button x:Name="btn_wireless" Style="{DynamicResource WirelessCommButton}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</local:BasePage>

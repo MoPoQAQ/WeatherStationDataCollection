@@ -1,0 +1,132 @@
+<Window x:Class="气象站数据采集系统.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:local="clr-namespace:气象站数据采集系统"
+        Title="气象站数据采集系统" Height="600" Width="900" 
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent" 
+        OpacityMask="White" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        Icon="Resources/Logos/Logo_Big.png" 
+        >
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <!-- Outer border with the drop shadow margin -->
+                        <Border Padding="{Binding OuterMarginSize, FallbackValue=0}" BorderBrush="{StaticResource ForegroundDarkBrush}" BorderThickness="{Binding FlatBorderThickness}" >
+
+                            <!-- Main window outline -->
+                            <Grid>
+
+                                <!-- Outer dragging border -->
+                                <Border BorderThickness="{Binding BeingMoved, Converter={local:BooleanToBorderThicknessConverter}}"
+                                        Panel.ZIndex="2"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        BorderBrush="{StaticResource WordOrangeBrush}" />
+
+                                <!-- Opacity mask for corners on grid -->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
+
+                                <!-- Window border and drop shadow -->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                    Background="{StaticResource ForegroundLightBrush}">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="0.5" Opacity="0.2" />
+                                    </Border.Effect>
+                                </Border>
+
+                                <!-- The main window content -->
+                                <Grid>
+
+                                    <!-- Corner clipping -->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+
+                                        <!-- Title Bar -->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+
+                                        <!-- Window Content -->
+                                        <RowDefinition Height="*" />
+
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Title Bar -->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1" Background="{StaticResource TitleBackgroundBrush}" MouseDown="Grid_MouseDown">
+
+                                        <Grid.ColumnDefinitions>
+                                            <!-- Icon -->
+                                            <ColumnDefinition Width="Auto" />
+                                            <!-- Title -->
+                                            <ColumnDefinition Width="*" />
+                                            <!-- Windows Button -->
+                                            <ColumnDefinition Width="Auto" />
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Icon -->
+                                        <Button Style="{StaticResource SystemIconButton}">
+                                            <Image Source="Resources/Logos/Logo.png" />
+                                        </Button>
+
+                                        <!-- Title -->
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+                                            <StackPanel>
+                                                <TextBlock FontFamily="KaiTi" FontSize="{StaticResource FontSizeLarge}">
+                                                    <Run Text="气象站" Foreground="{StaticResource WordOrangeBrush}" />
+                                                    <Run Text="数据" Foreground="{DynamicResource WordBlueBrush}" />
+                                                    <Run Text="采集" Foreground="{StaticResource WordRedBrush}" />
+                                                    <Run Text="系统" Foreground="{StaticResource WordGreenBrush}" />
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Viewbox>
+
+                                        <!-- Window Buttons -->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_" />
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[]" />
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X" />
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!-- Page Content -->
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}" ClipToBounds="True">
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
+                                    </Border>
+
+                                </Grid>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="{Binding ResizeBorderThickness}"
+            CaptionHeight="{Binding TitleHeight}"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            />
+    </WindowChrome.WindowChrome>
+
+    <Border>
+        <Border.Background>
+            <ImageBrush ImageSource="Resources/Backgrounds/background.jpg" Opacity="0.8"/>
+        </Border.Background>
+
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Border>
+</Window>
